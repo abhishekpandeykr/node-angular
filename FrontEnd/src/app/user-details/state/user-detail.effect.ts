@@ -58,7 +58,6 @@ export class UserDetailEffects {
         this.userDetailsService
           .updateUser(payload.id, payload.updatedUser)
           .pipe(
-            tap((val) => console.log(payload, 'dsdsds')),
             map(
               (props) =>
                 UserDetailsAction.updateUserSuccess({

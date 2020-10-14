@@ -129,7 +129,9 @@ export const userDetailsReducer = createReducer<IUserDetails>(
     UserDetailActions.updateUserSuccess,
     (state, action): IUserDetails => {
       const newDataList = state.allUsers.map((ele) => {
-        return ele._id === action.updatedUser._id ? action.updatedUser : ele;
+        return ele && ele._id === action && action.updatedUser._id
+          ? action.updatedUser
+          : ele;
       });
       console.log('data', newDataList);
       return {
