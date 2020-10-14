@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row mt-3 pt-3 pb-3">
+    <div class="col-4">
+      <h5 scope="col">Total User Notes:{{ (users$ | async).length }}</h5>
+      <div class="text-center" *ngIf="showLoader$ | async">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <ng-container *ngIf="!(showLoader$ | async)">
+        <div *ngIf="users$ | async as userList" class="table_container">
+          <table class="table">
+            <tbody>
+              <tr *ngFor="let user of userList">
+                <th scope="row" (click)="currentUser(user)">
+                  {{ user?.name }}
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
+      <!-- <label class="btn btn-primary">
+        <input
+          type="checkbox"
+          btnCheckbox
+          [checked]="checked"
+          [value]="checked"
+          (change)="listChange($event)"
+        />
+        Show All User
+      </label> -->
+      <button
+        type="button"
+        (click)="createUser()"
+        class="btn btn-primary mb-2 ml-2"
+      >
+        Create User Note
+      </button>
+    </div>
+    <div class="col-8" *ngIf="isTableVisible">
+      <app-user-update
+        #userDetailsForm
+        [currentSelectedUser]="currentSelectedUser"
+        (submmitedValue)="submmitedValue($event)"
+        (deleteUser)="deleteUser($event)"
+      ></app-user-update>
+    </div>
+  </div>
+</div>

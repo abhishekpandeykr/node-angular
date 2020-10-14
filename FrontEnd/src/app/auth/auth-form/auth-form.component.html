@@ -1,0 +1,31 @@
+<div class="container">
+  <form [formGroup]="userForm" (submit)="onSubmit(userForm)">
+    <div *ngFor="let user of userForm.controls | keyvalue; let i = $index">
+      <label [for]="i">{{ mappings[user?.key] }}</label>
+      <input
+        type="{{ user.key === 'password' ? 'password' : 'text' }}"
+        id="{{ i + user.key }}"
+        class="form-control mt-2"
+        [placeholder]="mappings[user?.key]"
+        aria-label="Username"
+        required
+        [formControlName]="user.key"
+        aria-describedby="basic-addon1"
+      />
+    </div>
+    <div class="invalid-feedback">Please provide a valid city.</div>
+    <div class="buttons mt-2">
+      <button type="submit" class="btn btn-primary float-right">
+        {{ isLogin ? "Sign In" : "Sign Up" }}
+      </button>
+      <button
+        *ngIf="isLogin"
+        (click)="signupPage.emit(isLogin)"
+        type="button"
+        class="btn btn-link float-left"
+      >
+        Sign Up
+      </button>
+    </div>
+  </form>
+</div>

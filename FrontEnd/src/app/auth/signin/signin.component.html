@@ -1,0 +1,34 @@
+<div class="container align">
+  <div class="box">
+    <ul
+      ngbNav
+      #nav="ngbNav"
+      (navChange)="tabChange($event)"
+      [(activeId)]="active"
+      class="nav-tabs mt-5 ml-1"
+    >
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>Signin</a>
+        <ng-template ngbNavContent>
+          <app-auth-form
+            (signupPage)="navigateToSignupTab($event)"
+            [isLogin]="isLogin"
+            (submittedForm)="submittedForm($event)"
+          ></app-auth-form>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>Sign Up</a>
+        <ng-template ngbNavContent>
+          TODO
+          <!-- <app-auth-form
+            [isLogin]="isLogin"
+            (submittedForm)="submittedForm($event)"
+          ></app-auth-form> -->
+        </ng-template>
+      </li>
+    </ul>
+
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
+</div>

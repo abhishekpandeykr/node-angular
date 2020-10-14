@@ -1,0 +1,8 @@
+<div class="container" *ngIf="isLoggedIn">
+  <header>
+    <a routerLink="/home">Home</a>
+    <a routerLink="/user/user-list">User Note</a>
+    <span (click)="logout()" class="logout">Logout</span>
+  </header>
+</div>
+<router-outlet></router-outlet>

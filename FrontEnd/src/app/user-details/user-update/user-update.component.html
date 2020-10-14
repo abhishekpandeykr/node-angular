@@ -1,0 +1,59 @@
+<div>
+  <h3>
+    {{
+      currentSelectedUser && currentSelectedUser["_id"]
+        ? "Update Note"
+        : "Create Note"
+    }}
+  </h3>
+  <form [formGroup]="userForm" (submit)="submit(userForm)">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1" [style.width.px]="105"
+          >Name</span
+        >
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Name"
+        aria-label="Username"
+        formControlName="name"
+        aria-describedby="basic-addon1"
+      />
+    </div>
+
+    <div class="input-group-prepend mb-3">
+      <span class="input-group-text" [style.width.px]="120">Notes</span>
+      <textarea
+        formControlName="notes"
+        class="form-control"
+        aria-label="With textarea"
+        placeholder="Notes"
+      ></textarea>
+    </div>
+
+    <div class="input-group-prepend mb-3">
+      <span class="input-group-text" [style.width.px]="120">Description</span>
+      <textarea
+        formControlName="description"
+        class="form-control"
+        placeholder="Description"
+        aria-label="With textarea"
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-success mr-3">
+      {{
+        currentSelectedUser && currentSelectedUser["_id"] ? "Update" : "Create"
+      }}
+    </button>
+    <button
+      *ngIf="currentSelectedUser && currentSelectedUser['_id']"
+      type="button"
+      class="btn btn-danger"
+      (click)="deleteUser.emit(currentSelectedUser['_id'])"
+    >
+      Delete
+    </button>
+  </form>
+</div>

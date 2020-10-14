@@ -1,0 +1,10 @@
+@import "../../../variables.scss";
+
+.table_container {
+  max-height: 400px;
+  overflow-y: auto;
+  th:hover {
+    cursor: pointer;
+    color: $text-color;
+  }
+}
