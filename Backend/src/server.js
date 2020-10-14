@@ -36,8 +36,7 @@ app.post('/', firstMiddleware, (req, res) => {
 })
 
 export const start = async () => {
-  const mongoUrl =
-    'mongodb+srv://abhishek:akpandey.1994@cluster0.1ha1f.mongodb.net/api-design?retryWrites=true&w=majority'
+  const mongoUrl = ''
   await connect(mongoUrl)
   app.listen(process.env.PORT || 5000, () => {
     console.log(`server is running at ${process.env.PORT}`)
