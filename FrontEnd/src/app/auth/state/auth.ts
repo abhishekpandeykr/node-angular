@@ -2,6 +2,7 @@ export interface AuthState {
   isLoggedIn: boolean;
   token: string;
   user: IUser;
+  isSuccess: any;
 }
 
 export interface IUser {

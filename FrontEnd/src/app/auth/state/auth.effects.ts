@@ -12,33 +12,31 @@ export class AuthEffect {
     return this.actions.pipe(
       ofType(AuthAction.signInForm),
       mergeMap((payload) =>
-        this.authService
-          .signIn(payload.userForm)
-          .pipe(
-            map((res: any) =>
-              AuthAction.submitFormSuccess({
-                user: res,
-                token: res.token,
-                isLoggedIn: true,
-              })
-            )
+        this.authService.signIn(payload.userForm).pipe(
+          map((res: any) =>
+            AuthAction.submitFormSuccess({
+              user: res,
+              token: res.token,
+              isLoggedIn: true,
+            })
           )
+        )
       )
     );
   });
 
   SignUpEffect$ = createEffect(() => {
     return this.actions.pipe(
-      ofType(AuthAction.submitSignup)
-      // switchMap((payload) => {
-      //   this.authService
-      //     .signUp(payload.form)
-      //     .pipe(
-      //       map((res: any) =>
-      //         AuthAction.submitFormSuccess({ user: res, token: res.token })
-      //       )
-      //     );
-      // })
+      ofType(AuthAction.submitSignup),
+      switchMap((payload) => {
+        return this.authService.signUp(payload.form).pipe(
+          map((res: any) =>
+            AuthAction.submitSignupSuccess({
+              token: res,
+            })
+          )
+        );
+      })
     );
   });
 }

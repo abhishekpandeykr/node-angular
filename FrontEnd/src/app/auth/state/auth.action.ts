@@ -6,6 +6,11 @@ export const submitSignup = createAction(
   props<{ form: IUser }>()
 );
 
+export const submitSignupSuccess = createAction(
+  '[Auth] Submit Signup Form',
+  props<{ token: string }>()
+);
+
 export const signInForm = createAction(
   '[Auth] Submit Sign In Form',
   props<{ userForm: IUser }>()

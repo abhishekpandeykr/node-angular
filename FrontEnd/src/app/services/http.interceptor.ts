@@ -8,10 +8,11 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { tap } from 'rxjs/internal/operators/tap';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class HttpsInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private toaster: ToastrService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -24,7 +25,6 @@ export class HttpsInterceptor implements HttpInterceptor {
         setHeaders: { Authorization: token },
       });
     }
-    console.log('header', modifiedReq.headers);
     return next.handle(modifiedReq).pipe(
       tap((event) => {
         if (event instanceof HttpResponse) {
@@ -32,9 +32,23 @@ export class HttpsInterceptor implements HttpInterceptor {
           if (event.url.endsWith('/signin')) {
             localStorage.setItem('authToken', event.body.token);
             localStorage.setItem('isLoggedIn', 'true');
+          } else {
+            this.showSuccess(modifiedReq, event.body);
           }
         }
       })
     );
+  }
+
+  showSuccess(req: HttpRequest<unknown>, event) {
+    if (event.body && event.body.errors && event.body.errors.length) {
+      this.toaster.error('Error', 'Something Went Wrong');
+    } else if (req.method === 'POST') {
+      this.toaster.success('Success', 'Created SuccessFully');
+    } else if (req.method === 'PUT') {
+      this.toaster.success('Success', 'Updated SuccessFully');
+    } else if (req.method === 'DELETE') {
+      this.toaster.success('Success', 'Deleted SuccessFully');
+    }
   }
 }

@@ -12,6 +12,7 @@ const initialState: AuthState = {
   isLoggedIn: false,
   token: null,
   user: null,
+  isSuccess: null,
 };
 
 export interface IAuthState extends AppState.IAppState {
@@ -23,12 +24,20 @@ const authReducer = createReducer<AuthState>(
   on(
     AuthAction.submitFormSuccess,
     (state, payload): AuthState => {
-      console.log(payload);
       return {
         ...state,
         isLoggedIn: payload.isLoggedIn,
         token: payload.token,
         user: payload.user,
+      };
+    }
+  ),
+  on(
+    AuthAction.submitSignupSuccess,
+    (state, payload): AuthState => {
+      return {
+        ...state,
+        isSuccess: payload.token,
       };
     }
   )

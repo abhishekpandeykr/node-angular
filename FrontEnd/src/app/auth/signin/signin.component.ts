@@ -1,4 +1,4 @@
-import { isLoggedInSelector } from './../state/auth.selector';
+import { isLoggedInSelector, singupSelector } from './../state/auth.selector';
 // import { isLoggedInSelector } from './../state/auth.reducer';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbNav } from '@ng-bootstrap/ng-bootstrap';
@@ -19,8 +19,16 @@ export class SigninComponent implements OnInit {
 
   constructor(private store: Store<IAppState>, private router: Router) {
     this.store.select(isLoggedInSelector).subscribe((res) => {
+      console.log('res', res);
       if (res) {
         this.router.navigate(['user', 'user-list']);
+      }
+    });
+
+    this.store.select(singupSelector).subscribe((res) => {
+      if (res) {
+        this.nav.activeId = 1;
+        this.isLogin = true;
       }
     });
   }
