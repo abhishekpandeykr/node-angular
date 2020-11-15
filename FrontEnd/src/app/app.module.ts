@@ -20,7 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [AppComponent, HomePageComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     UserDetailsModule,
     ReactiveFormsModule,

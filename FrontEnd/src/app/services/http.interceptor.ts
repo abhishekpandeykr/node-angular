@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs/internal/Observable';
 import { tap } from 'rxjs/internal/operators/tap';
 import { ToastrService } from 'ngx-toastr';
+declare var localStorage;
 
 @Injectable()
 export class HttpsInterceptor implements HttpInterceptor {

@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { IAppState } from './state/app.state';
 import { isLoggedInSelector } from './auth/state/auth.selector';
 import { Router } from '@angular/router';
+declare var localStorage;
 
 @Component({
   selector: 'app-root',

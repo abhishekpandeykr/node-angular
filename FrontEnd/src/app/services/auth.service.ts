@@ -3,6 +3,7 @@ import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
+declare var localStorage;
 
 @Injectable({
   providedIn: 'root',
